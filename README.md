@@ -6,7 +6,7 @@ A collection of board games.
 
 > Under development
 
-See branches for current status
+Currently adding checkers as a game option.
 
 ### Licensing
 
