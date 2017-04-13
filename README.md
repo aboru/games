@@ -2,6 +2,10 @@
 
 A collection of board games.
 
+### Running
+
+> ./gradlew :run
+
 ### Status
 
 > Under development
