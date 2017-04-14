@@ -14,15 +14,29 @@
  * limitations under the License.
  */
 
-package com.aboru.games;
+package com.aboru.games.ui;
 
-import com.aboru.games.ui.ApplicationView;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class GamesApplication {
+public class ApplicationView extends Application {
 
-    public static void main(final String[] arguments) {
-        Application.launch(ApplicationView.class, arguments);
+    @Override
+    public void start(final Stage stage) {
+        stage.setTitle("Games");
+
+        Button button = new Button();
+        button.setText("Say 'Hello, World!'");
+        button.setOnAction(event -> System.out.println("Hello, World"));
+
+        StackPane root = new StackPane();
+        root.getChildren().add(button);
+
+        stage.setScene(new Scene(root, 300, 250));
+        stage.show();
     }
 
 }
