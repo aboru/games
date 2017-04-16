@@ -14,20 +14,34 @@
  * limitations under the License.
  */
 
-package com.aboru.games;
+package com.aboru.games.checkers;
 
 /**
- * Defines the application entry point.
+ * Enumerates the possible types of a checker at any position.
+ *
+ * <p>The only types that are legal playing types are {@code Checker} and
+ * {@code King}.
+ *
+ * @author aboru
  */
-public class GamesApplication {
+public enum Type {
+
+    None,
+    Checker,
+    King;
 
     /**
-     * Application main method, picks up program arguments from the command line.
+     * Maps the given value to a checker type.
      *
-     * @param arguments     the program arguments.
+     * @param value     the value to be mapped.
+     * @return          the mapped value.
      */
-    public static void main(final String[] arguments) {
-
+    public static Type map(final int value) {
+        if (value >= 3)
+            return King;
+        if (value >= 1)
+            return Checker;
+        return None;
     }
 
 }

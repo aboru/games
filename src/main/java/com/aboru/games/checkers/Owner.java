@@ -14,20 +14,30 @@
  * limitations under the License.
  */
 
-package com.aboru.games;
+package com.aboru.games.checkers;
 
 /**
- * Defines the application entry point.
+ * Enumerates the possible occupants of a position.
+ *
+ * @author aboru
  */
-public class GamesApplication {
+public enum Owner {
+
+    None,
+    PlayerOne,
+    PlayerTwo;
 
     /**
-     * Application main method, picks up program arguments from the command line.
+     * Determines the owner of a value based on the integer value provided.
      *
-     * @param arguments     the program arguments.
+     * @param value     the value to decide on the owner.
+     * @return          the owner from this value.
      */
-    public static void main(final String[] arguments) {
-
+    public static Owner map(final int value) {
+        if (value % 2 == 1)
+            return PlayerOne;
+        if (value % 2 == 0)
+            return PlayerTwo;
+        return None;
     }
-
 }
