@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-package com.aboru.games.checkers;
+package com.aboru.games.io;
 
-/**
- * Enumerates the possible types of a checker at any position.
- *
- * <p>The only types that are legal playing types are {@code Checker} and
- * {@code King}.
- *
- * @author aboru
- */
-public enum Type {
+import java.util.Scanner;
 
-    None,
-    Checker,
-    King;
+public enum ConsoleReader {
 
-    /**
-     * Maps the given value to a checker type.
-     *
-     * @param value     the value to be mapped.
-     * @return          the mapped value.
-     */
-    public static Type map(final int value) {
-        if (value >= 3)
-            return King;
-        if (value >= 1)
-            return Checker;
-        return None;
+    INSTANCE;
+
+    private final Scanner in;
+
+    private ConsoleReader() {
+        this.in = new Scanner(System.in);
     }
+
+
 
 }

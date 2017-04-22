@@ -16,28 +16,30 @@
 
 package com.aboru.games.checkers;
 
-/**
- * Enumerates the possible occupants of a position.
- *
- * @author aboru
- */
-public enum Owner {
+public class Coordinates {
 
-    None,
-    PlayerOne,
-    PlayerTwo;
+    private int x;
+    private int y;
 
-    /**
-     * Determines the owner of a value based on the integer value provided.
-     *
-     * @param value     the value to decide on the owner.
-     * @return          the owner from this value.
-     */
-    public static Owner map(final int value) {
-        if (value % 2 == 1)
-            return PlayerOne;
-        if (value % 2 == 0)
-            return PlayerTwo;
-        return None;
+    public void setX(final int x) {
+        this.x = x;
     }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public void setY(final int y) {
+        this.y = y;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%d, %d)", this.x, this.y);
+    }
+
 }

@@ -16,18 +16,59 @@
 
 package com.aboru.games;
 
-/**
- * Defines the application entry point.
- */
+import com.aboru.games.checkers.Board;
+import com.aboru.games.checkers.Coordinates;
+import com.aboru.games.checkers.Move;
+
+import java.util.Scanner;
+
 public class GamesApplication {
 
-    /**
-     * Application main method, picks up program arguments from the command line.
-     *
-     * @param arguments     the program arguments.
-     */
-    public static void main(final String[] arguments) {
+    private static int getInt(final Scanner in, final String prompt) {
+        int coordinate;
 
+        do {
+            System.out.print(prompt + ": ");
+            coordinate = in.nextInt();
+        } while (coordinate < 0 || coordinate > 7);
+
+        return coordinate;
+    }
+
+    public static void main(final String[] arguments) {
+        final Scanner in = new Scanner(System.in);
+
+        int player = 1;
+        Board board = new Board();
+
+        while (!board.isWin(player)) {
+            System.out.println(board);
+            System.out.printf("player %d make your move\n", player);
+
+            int x0 = getInt(in, "x coordinate");
+            int y0 = getInt(in, "y coordinate");
+            int x1 = getInt(in, "destination x coordinate");
+            int y1 = getInt(in, "destination y coordinate");
+
+            Coordinates initial, destination;
+            initial = new Coordinates();
+            initial.setX(x0);
+            initial.setY(y0);
+            destination = new Coordinates();
+            destination.setX(x1);
+            destination.setY(y1);
+
+            Move move = new Move();
+            move.add(initial);
+            move.add(destination);
+
+            board.move(move);
+
+            player = (player % 2) + 1;
+        }
+
+        System.out.printf("player %d wins!\n", (player % 2) + 1);
+        System.out.println(board);
     }
 
 }
