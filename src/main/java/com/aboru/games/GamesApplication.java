@@ -17,23 +17,12 @@
 package com.aboru.games;
 
 import com.aboru.games.checkers.Board;
-import com.aboru.games.checkers.Coordinates;
 import com.aboru.games.checkers.Move;
+import com.aboru.games.io.ConsoleReader;
 
 import java.util.Scanner;
 
 public class GamesApplication {
-
-    private static int getInt(final Scanner in, final String prompt) {
-        int coordinate;
-
-        do {
-            System.out.print(prompt + ": ");
-            coordinate = in.nextInt();
-        } while (coordinate < 0 || coordinate > 7);
-
-        return coordinate;
-    }
 
     public static void main(final String[] arguments) {
         final Scanner in = new Scanner(System.in);
@@ -45,22 +34,17 @@ public class GamesApplication {
             System.out.println(board);
             System.out.printf("player %d make your move\n", player);
 
-            int x0 = getInt(in, "x coordinate");
-            int y0 = getInt(in, "y coordinate");
-            int x1 = getInt(in, "destination x coordinate");
-            int y1 = getInt(in, "destination y coordinate");
+            final Move move = new Move();
 
-            Coordinates initial, destination;
-            initial = new Coordinates();
-            initial.setX(x0);
-            initial.setY(y0);
-            destination = new Coordinates();
-            destination.setX(x1);
-            destination.setY(y1);
+            System.out.println("Starting position");
+            move.add(ConsoleReader.getCoordinate());
+            System.out.println("Landing position");
+            move.add(ConsoleReader.getCoordinate());
 
-            Move move = new Move();
-            move.add(initial);
-            move.add(destination);
+            while (ConsoleReader.isAnotherInput()) {
+                System.out.println("Landing position");
+                move.add(ConsoleReader.getCoordinate());
+            }
 
             board.move(move);
 

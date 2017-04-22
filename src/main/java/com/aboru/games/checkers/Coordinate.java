@@ -16,7 +16,7 @@
 
 package com.aboru.games.checkers;
 
-public class Coordinates {
+public class Coordinate {
 
     private int x;
     private int y;

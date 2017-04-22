@@ -16,6 +16,8 @@
 
 package com.aboru.games.io;
 
+import com.aboru.games.checkers.Coordinate;
+
 import java.util.Scanner;
 
 public enum ConsoleReader {
@@ -24,10 +26,52 @@ public enum ConsoleReader {
 
     private final Scanner in;
 
-    private ConsoleReader() {
+    ConsoleReader() {
         this.in = new Scanner(System.in);
     }
 
+    public static boolean isAnotherInput() {
+        System.out.printf("Is there another move? ");
+        boolean isFirstAttempt = Boolean.TRUE;
+        String result;
 
+        do {
+            if (!isFirstAttempt) {
+                System.out.print("I did not understand, answer as Y or N: ");
+            }
+
+            result = INSTANCE.in.next();
+
+            isFirstAttempt = Boolean.FALSE;
+        } while (!result.toUpperCase().equals("Y") && !result.toUpperCase().equals("N"));
+
+        return result.toUpperCase().equals("Y");
+    }
+
+    public static Coordinate getCoordinate() {
+        final Coordinate coordinate = new Coordinate();
+        coordinate.setX(INSTANCE.getOne("x"));
+        coordinate.setY(INSTANCE.getOne("y"));
+        return coordinate;
+    }
+
+    private int getOne(final String type) {
+        boolean isFirstAttempt = Boolean.TRUE;
+        int result;
+
+        do {
+            if (!isFirstAttempt) {
+                System.out.println("Invalid input, must be in range 0-7");
+            }
+
+            System.out.printf("input %s coordinate: ", type);
+
+            result = in.nextInt();
+
+            isFirstAttempt = Boolean.FALSE;
+        } while (result < 0 || result > 7);
+
+        return result;
+    }
 
 }

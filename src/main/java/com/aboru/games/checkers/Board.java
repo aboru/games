@@ -45,13 +45,13 @@ public class Board {
         return Boolean.TRUE;
     }
 
-    public int get(final Coordinates location) {
+    public int get(final Coordinate location) {
         return this.state[location.getY()][location.getX()];
     }
 
     public void move(final Move move) {
-        Coordinates initial = move.next();
-        Coordinates destination = null;
+        Coordinate initial = move.next();
+        Coordinate destination;
 
         while (move.hasNext()) {
             destination = move.next();
@@ -60,9 +60,9 @@ public class Board {
             this.set(initial, 0);
 
             if (Math.abs(initial.getX() - destination.getX()) > 1) {
-                final Coordinates intermediate = new Coordinates();
-                intermediate.setX(Math.abs(initial.getX() - destination.getX()) / (initial.getX() - destination.getX()));
-                intermediate.setY(Math.abs(initial.getY() - destination.getY()) / (initial.getY() - destination.getY()));
+                final Coordinate intermediate = new Coordinate();
+                intermediate.setX(initial.getX() + (this.getDirection(initial.getX(), destination.getX())));
+                intermediate.setY(initial.getY() + (this.getDirection(initial.getY(), destination.getX())));
                 this.set(intermediate, 0);
             }
 
@@ -70,7 +70,11 @@ public class Board {
         }
     }
 
-    private void set(final Coordinates location, final int value) {
+    private int getDirection(final int p0, final int p1) {
+        return (p1 - p0) / Math.abs(p1 - p0);
+    }
+
+    private void set(final Coordinate location, final int value) {
         this.state[location.getY()][location.getX()] = value;
     }
 

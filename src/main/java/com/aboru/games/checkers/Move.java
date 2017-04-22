@@ -21,7 +21,7 @@ import java.util.List;
 
 public class Move {
 
-    private List<Coordinates> moves;
+    private List<Coordinate> moves;
     private int current;
 
     public Move() {
@@ -29,31 +29,23 @@ public class Move {
         this.current = 0;
     }
 
-    public void add(final Coordinates move) {
+    public void add(final Coordinate move) {
         this.moves.add(move);
     }
 
-    public Coordinates next() {
+    public Coordinate next() {
         return this.moves.get(current++);
     }
 
     public boolean hasNext() {
-        return this.moves.size() == current + 1;
-    }
-
-    public void reset() {
-        this.current = 0;
-    }
-
-    public Coordinates get(final int index) {
-        return this.moves.get(index);
+        return this.moves.size() > current;
     }
 
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder("[ ");
 
-        for (final Coordinates coordinate : moves)
+        for (final Coordinate coordinate : moves)
             result.append(coordinate).append(" ");
 
         return result.append("]").toString();
